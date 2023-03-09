@@ -10,7 +10,7 @@ pipeline {
     }
     agent none
     stages {
-       stage('Build image') {
+       stage('Construction de l\'application') {
            agent any
            steps {
               script {
@@ -18,7 +18,7 @@ pipeline {
               }
            }
        }
-       stage('Run container based on builded image') {
+       stage('Lancement du conteneur en se basant sur l\'image') {
           agent any
           steps {
             script {
@@ -29,7 +29,7 @@ pipeline {
              }
           }
        }
-       stage('Test image') {
+       stage('Teste de l\'image') {
            agent any
            steps {
               script {
@@ -39,7 +39,7 @@ pipeline {
               }
            }
        }
-       stage('Clean container') {
+       stage('Suppression de l\'image') {
           agent any
           steps {
              script {
@@ -50,7 +50,7 @@ pipeline {
              }
           }
       }
-      stage('Push image in staging and deploy it') {
+      stage('Téléchargement de l\'image dans l\'environnement de staging puis le déployer') {
         when {
             expression { GIT_BRANCH == 'origin/main' }
         }
@@ -69,7 +69,7 @@ pipeline {
            }
         }
      }
-     stage('Push image in production and deploy it') {
+     stage('Téléchargement et déploiement en production') {
        when {
            expression { GIT_BRANCH == 'origin/main' }
        }
